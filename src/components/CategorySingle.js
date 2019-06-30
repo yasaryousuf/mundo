@@ -14,7 +14,6 @@ import SidebarComponent from "./SidebarComponent";
 
 export default class CategorySingle extends React.Component {
     constructor(props) {
-        console.log('render');
         super(props);
         this.state = {
             searchTerm: '',
@@ -24,18 +23,34 @@ export default class CategorySingle extends React.Component {
     }
 
     componentDidMount() {
-        this.getData()
+        this.getData('', '');
     }
 
-    componentWillReceiveProps() {
-        this.getData()
+    componentDidUpdate() {
     }
 
-    getData() {
-        let categoryName = this.props.match.params.category;
+    componentWillReceiveProps(nextProps) {
+        this.getData(nextProps.match.params.category, '');
+    }
+
+    search(term) {
+        console.log(term)
+        this.getData('sport', term);
+    }
+
+    getData(category, term) {
+        let searchString = '&q=';
+        if (term) {
+            searchString = `&q=${term}`;
+        }
+        let categoryName = category;
+        if (!category) {
+            categoryName = this.props.match.params.category;
+        }
+        
 
         axios(
-            `https://newsapi.org/v2/top-headlines?language=en&apiKey=${apikey}&category=${categoryName}`,
+            `https://newsapi.org/v2/top-headlines?language=en&apiKey=${apikey}&category=${categoryName}${searchString}`,
             {
                 method: "GET",
                 mode: "no-cors"
@@ -75,7 +90,7 @@ export default class CategorySingle extends React.Component {
 
                         <div className="col-md-4">
 
-                            <SearchComponent />
+                            <SearchComponent search={this.search} />
 
                             <CategoriesComponent url={this.state.url} addCategory={this.addCategory} />
 

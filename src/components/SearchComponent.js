@@ -2,6 +2,7 @@ import React from "react";
 
 export default class SearchComponent extends React.Component {
     constructor(props) {
+        console.log(props)
         super(props);
         this.state = {
             searchTerm: '',

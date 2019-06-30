@@ -17,8 +17,6 @@ export default class CategoryIndex extends React.Component {
         console.log("constructor");
         super(props);
         this.state = {
-            searchTerm: '',
-
             articles: [],
             categories: []
         };
@@ -26,28 +24,17 @@ export default class CategoryIndex extends React.Component {
     }
 
     search(term) {
-        this.setState({
-            searchTerm: term,
-        });
-
-        let query = new URLSearchParams(history.location.search)
-        query.set('q', term);
-        console.log(query);
-        // history.replace({
-        //     ...history.location,
-        //     search: query.toString()
-        // })
+        this.getData(term);
     }
 
     componentDidMount()  {
-        console.log("componentDidMount");
         this.getData(this.state.searchTerm);
     }
 
-    getData(q) {
+    getData(term) {
         let searchString = '&q=';
-        if (q) {
-            searchString = `&q=${q}`;
+        if (term) {
+            searchString = `&q=${term}`;
         }
 
         axios(
@@ -58,6 +45,7 @@ export default class CategoryIndex extends React.Component {
             }
         )
             .then(response => {
+                console.log('api response');
                 console.log(response);
                 this.setState({ articles: response.data.articles });
             })
@@ -66,19 +54,8 @@ export default class CategoryIndex extends React.Component {
             });
     }
 
-    componentWillReceiveProps() {
-        console.log("componentWillReceiveProps");
-
-        console.log(this.props);
-    }
-
-
 
     render() {
-        console.log("render");
-        console.log(this.props.location.search);
-        console.log(this.state.searchTerm);
-        // this.getData(this.state.searchTerm);
 
         return (
             <div className="App">

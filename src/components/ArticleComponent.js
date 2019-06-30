@@ -23,7 +23,7 @@ export default class ArticleComponent extends React.Component {
             </a>
                     </div>
                     <div className="card-footer text-muted">
-                        {moment(this.props.article.publishedAt).fromNow(true)} ago {this.props.article.author ? 'by' : ''} &nbsp;
+                        {moment(this.props.article.publishedAt).fromNow(true)} ago {this.props.article.author ? 'by' : ''}&nbsp;
             <a href="#">{this.props.article.author}</a>
                     </div>
                 </div>
