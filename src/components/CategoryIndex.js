@@ -10,6 +10,7 @@ import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
+import LoadingComponent from "./LoadingComponent";
 import history from './History';
 
 export default class CategoryIndex extends React.Component {

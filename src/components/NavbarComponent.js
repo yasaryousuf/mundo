@@ -31,12 +31,12 @@ export default class NavbarComponent extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <NavbarBrand href="/">Mundo</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/source/">Source</NavLink>
+                <NavLink href="/">All</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/category/sports">
@@ -48,10 +48,10 @@ export default class NavbarComponent extends React.Component {
                   Options
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
+                  <DropdownItem>Coming</DropdownItem>
+                  <DropdownItem>soon</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
+                  <DropdownItem>Cheers!</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

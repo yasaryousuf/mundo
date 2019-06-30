@@ -10,6 +10,7 @@ import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
+import LoadingComponent from "./LoadingComponent";
 
 
 export default class CategorySingle extends React.Component {
@@ -18,8 +19,10 @@ export default class CategorySingle extends React.Component {
         this.state = {
             searchTerm: '',
             articles: [],
-            categories: []
-        }; 
+            categories: [],
+            isLoading: true
+        };
+        this.search = this.search.bind(this);
     }
 
     componentDidMount() {
@@ -35,10 +38,12 @@ export default class CategorySingle extends React.Component {
 
     search(term) {
         console.log(term)
-        this.getData('sport', term);
+        this.getData('', term);
     }
 
     getData(category, term) {
+
+        this.setState({ isLoading: true });
         let searchString = '&q=';
         if (term) {
             searchString = `&q=${term}`;
@@ -58,7 +63,7 @@ export default class CategorySingle extends React.Component {
         )
         .then(response => {
             console.log(response);
-            this.setState({ articles: response.data.articles });
+            this.setState({ articles: response.data.articles, isLoading: false });
         })
         .catch(e => {
             console.log(e);
@@ -80,7 +85,8 @@ export default class CategorySingle extends React.Component {
                                 MUNDO&nbsp;
                                 <small>World News</small>
                             </h1>
-                            {this.state.articles.map((article, i) =>
+                            
+                            {this.state.isLoading === true ? <LoadingComponent /> : this.state.articles.map((article, i) =>
                                 <ArticleComponent key={i} article={article} />
                             )}
 
