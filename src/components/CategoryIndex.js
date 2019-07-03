@@ -25,21 +25,44 @@ export default class CategoryIndex extends React.Component {
             searchParams: {
                 apiKey: apikey,
                 q: '',
-                country: '',
-                sources: ''
+                country: 'us',
+                sources: '',
+                page: 0
             }
         };
         this.search         = this.search.bind(this);
         this.selectCountry  = this.selectCountry.bind(this);
     }
 
-    selectCountry(country) {
-        this.setState(prevState => {return {
-            searchParams: {
-                ...prevState.searchParams, country: country
-            }};
+    selectPage(page) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, page: page
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
         });
-        // this.getData(term);
+
+    }
+
+    selectCountry(country) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, country: country
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
 
     }
 
@@ -50,40 +73,43 @@ export default class CategoryIndex extends React.Component {
                     ...prevState.searchParams, q: term
                 }
             };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
         });
     }
 
     componentDidUpdate() {
-        console.log(this.state);
+
     }
 
-    componentDidMount()  {
-        this.getData(this.state.searchTerm);
+    componentDidMount() {
+        let urlParam = new URLSearchParams(this.state.searchParams);
+        urlParam = urlParam.toString();
+        this.getData(urlParam);
+        // console.log(urlParam);
+
     }
 
-    getData(term) {
-        console.log(this.state);
+    getData(urlParam) {
+        console.log(urlParam);
         this.setState({ isLoading: true });
-        let searchString = '&q=';
-        if (term) {
-            searchString = `&q=${term}`;
-        }
-        // console.log(queryString.stringify(this.state.searchParams)); 
-        // axios(
-        //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apikey}${searchString}`,
-        //     {
-        //         method: "GET",
-        //         mode: "no-cors"
-        //     }
-        // )
-        //     .then(response => {
-        //         console.log('api response');
-        //         console.log(response);
-        //         this.setState({ articles: response.data.articles, isLoading: false });
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
+
+        axios(
+            `https://newsapi.org/v2/top-headlines?${urlParam}`,
+            {
+                method: "GET",
+                mode: "no-cors"
+            }
+        )
+            .then(response => {
+                this.setState({ articles: response.data.articles, isLoading: false });
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 
 
@@ -103,7 +129,7 @@ export default class CategoryIndex extends React.Component {
                                 <ArticleComponent key={i} article={article} />
                             )}
 
-                            <PaginationComponent />
+                            <PaginationComponent page={this.state.searchParams.page} selectPage={this.selectPage}/>
 
                         </div>
 

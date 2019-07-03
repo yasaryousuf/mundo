@@ -25,6 +25,11 @@ export default class SidebarComponent extends React.Component {
                     <div className="row mx-2">
                     <div className="col-md-4">
                         <div className="checkbox">
+                            <label><input type="radio" value="" name="country" onChange={this.handleChange} /> All</label>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="checkbox">
                             <label><input type="radio" value="gb" name="country" onChange={this.handleChange} /> England</label>
                         </div>
                     </div>
