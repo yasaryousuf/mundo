@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 import ContainerComponent from "./components/ContainerComponent";
 import CategoryIndex from "./components/CategoryIndex";
 import CategorySingle from "./components/CategorySingle";
+import SingleArticleComponent from "./components/SingleArticleComponent";
 
 export default class CategoriesComponent extends React.Component {
     render() {
@@ -11,10 +12,11 @@ export default class CategoriesComponent extends React.Component {
                 <Router>
                     <div>
                         <Route path="/" exact component={withRouter(CategoryIndex)} />
-                        <Route exact path="/category" exact component={withRouter(CategoryIndex)} />
+                        <Route path="/category" exact component={withRouter(CategoryIndex)} />
                         <Route path="/category/:category" component={CategorySingle} />
+                        <Route path="/news" component={SingleArticleComponent} />
                         
-                        <Route path="/source/" component={ContainerComponent} />
+
                     </div>
                 </Router>
             </>

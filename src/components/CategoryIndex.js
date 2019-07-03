@@ -10,22 +10,51 @@ import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
-import LoadingComponent from "./LoadingComponent";
+import Spinner from "./Spinner";
+
 import history from './History';
+import {queryString} from 'query-string';
 
 export default class CategoryIndex extends React.Component {
     constructor(props) {
-        console.log("constructor");
         super(props);
         this.state = {
             articles: [],
-            categories: []
+            categories: [],
+            isLoading: true,
+            searchParams: {
+                apiKey: apikey,
+                q: '',
+                country: '',
+                sources: ''
+            }
         };
-        this.search = this.search.bind(this);
+        this.search         = this.search.bind(this);
+        this.selectCountry  = this.selectCountry.bind(this);
+    }
+
+    selectCountry(country) {
+        this.setState(prevState => {return {
+            searchParams: {
+                ...prevState.searchParams, country: country
+            }};
+        });
+        // this.getData(term);
+
     }
 
     search(term) {
-        this.getData(term);
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, q: term
+                }
+            };
+        });
+    }
+
+    componentDidUpdate() {
+        console.log(this.state);
     }
 
     componentDidMount()  {
@@ -33,26 +62,28 @@ export default class CategoryIndex extends React.Component {
     }
 
     getData(term) {
+        console.log(this.state);
+        this.setState({ isLoading: true });
         let searchString = '&q=';
         if (term) {
             searchString = `&q=${term}`;
         }
-
-        axios(
-            `https://newsapi.org/v2/top-headlines?language=en&apiKey=${apikey}${searchString}`,
-            {
-                method: "GET",
-                mode: "no-cors"
-            }
-        )
-            .then(response => {
-                console.log('api response');
-                console.log(response);
-                this.setState({ articles: response.data.articles });
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        // console.log(queryString.stringify(this.state.searchParams)); 
+        // axios(
+        //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apikey}${searchString}`,
+        //     {
+        //         method: "GET",
+        //         mode: "no-cors"
+        //     }
+        // )
+        //     .then(response => {
+        //         console.log('api response');
+        //         console.log(response);
+        //         this.setState({ articles: response.data.articles, isLoading: false });
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
     }
 
 
@@ -68,7 +99,7 @@ export default class CategoryIndex extends React.Component {
                                 MUNDO&nbsp;
                 <small>World News</small>
                             </h1>
-                            {this.state.articles.map((article, i) =>
+                            {this.state.isLoading === true ? <Spinner/> : this.state.articles.map((article, i) =>
                                 <ArticleComponent key={i} article={article} />
                             )}
 
@@ -82,7 +113,7 @@ export default class CategoryIndex extends React.Component {
 
                             <CategoriesComponent url={this.state.url} addCategory={this.addCategory} />
 
-                            <SidebarComponent />
+                            <SidebarComponent selectCountry={this.selectCountry}/>
 
                         </div>
                     </div>

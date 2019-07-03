@@ -1,8 +1,8 @@
 import React from "react";
+import history from './History';
 
 export default class SearchComponent extends React.Component {
     constructor(props) {
-        console.log(props)
         super(props);
         this.state = {
             searchTerm: '',
@@ -20,7 +20,7 @@ export default class SearchComponent extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
+  
         this.props.search(this.state.searchTerm);
     }
 

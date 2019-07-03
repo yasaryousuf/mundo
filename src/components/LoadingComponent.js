@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '../node_modules/@emotion/core';
 // First way to import
 import { ClipLoader } from 'react-spinners';
 // Another way to import

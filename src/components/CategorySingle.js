@@ -10,7 +10,7 @@ import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
-import LoadingComponent from "./LoadingComponent";
+// import LoadingComponent from "./LoadingComponent";
 
 
 export default class CategorySingle extends React.Component {
@@ -37,7 +37,6 @@ export default class CategorySingle extends React.Component {
     }
 
     search(term) {
-        console.log(term)
         this.getData('', term);
     }
 
@@ -55,7 +54,7 @@ export default class CategorySingle extends React.Component {
         
 
         axios(
-            `https://newsapi.org/v2/top-headlines?language=en&apiKey=${apikey}&category=${categoryName}${searchString}`,
+            `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apikey}&category=${categoryName}${searchString}`,
             {
                 method: "GET",
                 mode: "no-cors"
@@ -86,7 +85,7 @@ export default class CategorySingle extends React.Component {
                                 <small>World News</small>
                             </h1>
                             
-                            {this.state.isLoading === true ? <LoadingComponent /> : this.state.articles.map((article, i) =>
+                            {this.state.isLoading === true ? <h1>Loading...</h1> : this.state.articles.map((article, i) =>
                                 <ArticleComponent key={i} article={article} />
                             )}
 
