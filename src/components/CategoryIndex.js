@@ -10,50 +10,144 @@ import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
-import LoadingComponent from "./LoadingComponent";
+import Spinner from "./Spinner";
+import PerPage from "./SideComponent/PerPage";
+
 import history from './History';
-import Spinner from './Spinner';
 
 export default class CategoryIndex extends React.Component {
     constructor(props) {
-        console.log("constructor");
         super(props);
         this.state = {
             articles: [],
-            categories: []
+            categories: [],
+            isLoading: true,
+            searchParams: {
+                apiKey: apikey,
+                q: '',
+                country: 'us',
+                sources: '',
+                page: 0,
+                pageSize: 20,
+            }
         };
-        this.search = this.search.bind(this);
+        this.search         = this.search.bind(this);
+        this.selectCountry = this.selectCountry.bind(this);
+        this.selectCategory = this.selectCategory.bind(this);
+        this.selectPage = this.selectPage.bind(this);
+        this.selectPerPage  = this.selectPerPage.bind(this);
+    }
+
+    selectPage(page) {
+        page < 0 ? page = 0 : page = page;
+        
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, page: page
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
+
+    }
+
+    selectPerPage(perpage) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, pageSize: perpage
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
+
+    }
+
+    selectCountry(country) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, country: country
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
+
+    }
+
+    selectCategory(category) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, category: category
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
+
     }
 
     search(term) {
-        this.getData(term);
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, q: term
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
     }
 
-    componentDidMount()  {
-        this.getData(this.state.searchTerm);
+    componentDidUpdate() {
+
     }
 
-    getData(term) {
-        let searchString = '&q=';
-        if (term) {
-            searchString = `&q=${term}`;
-        }
+    componentDidMount() {
+        let urlParam = new URLSearchParams(this.state.searchParams);
+        urlParam = urlParam.toString();
+        this.getData(urlParam);
+        // console.log(urlParam);
 
-        axios(
-            `https://newsapi.org/v2/top-headlines?language=en&apiKey=${apikey}${searchString}`,
-            {
-                method: "GET",
-                mode: "no-cors"
-            }
-        )
-            .then(response => {
-                console.log('api response');
-                console.log(response);
-                this.setState({ articles: response.data.articles });
-            })
-            .catch(e => {
-                console.log(e);
-            });
+    }
+
+    getData(urlParam) {
+        console.log(urlParam);
+        this.setState({ isLoading: true });
+
+        // axios(
+        //     `https://newsapi.org/v2/top-headlines?${urlParam}`,
+        //     {
+        //         method: "GET",
+        //         mode: "no-cors"
+        //     }
+        // )
+        //     .then(response => {
+        //         this.setState({ articles: response.data.articles, isLoading: false });
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
     }
 
 
@@ -69,21 +163,23 @@ export default class CategoryIndex extends React.Component {
                                 MUNDO&nbsp;
                 <small>World News</small>
                             </h1>
-                            {this.state.articles.map((article, i) =>
+                            {this.state.isLoading === true ? <Spinner/> : this.state.articles.map((article, i) =>
                                 <ArticleComponent key={i} article={article} />
                             )}
 
-                            <PaginationComponent />
+                            <PaginationComponent page={this.state.searchParams.page} selectPage={this.selectPage}/>
 
                         </div>
 
                         <div className="col-md-4">
 
-                            <SearchComponent search={this.search}/>
+                            <SearchComponent search={this.search} />
 
-                            <CategoriesComponent url={this.state.url} addCategory={this.addCategory} />
+                            <PerPage perpage={this.state.searchParams.pageSize} selectPerPage={this.selectPerPage}/>
 
-                            <SidebarComponent />
+                            <CategoriesComponent url={this.state.url} addCategory={this.addCategory} selectCategory={this.selectCategory} />
+
+                            <SidebarComponent selectCountry={this.selectCountry}/>
 
                         </div>
                     </div>
