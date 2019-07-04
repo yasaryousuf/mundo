@@ -12,6 +12,7 @@ import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
 import LoadingComponent from "./LoadingComponent";
 import history from './History';
+import Spinner from './Spinner';
 
 export default class CategoryIndex extends React.Component {
     constructor(props) {

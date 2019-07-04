@@ -11,6 +11,7 @@ import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
 import SidebarComponent from "./SidebarComponent";
 import LoadingComponent from "./LoadingComponent";
+import Spinner from './Spinner';
 
 
 export default class CategorySingle extends React.Component {
@@ -22,6 +23,7 @@ export default class CategorySingle extends React.Component {
             categories: [],
             isLoading: true
         };
+        console.log(this.props);
         this.search = this.search.bind(this);
     }
 
@@ -86,7 +88,7 @@ export default class CategorySingle extends React.Component {
                                 <small>World News</small>
                             </h1>
                             
-                            {this.state.isLoading === true ? <LoadingComponent /> : this.state.articles.map((article, i) =>
+                            {this.state.isLoading === true ? <Spinner /> : this.state.articles.map((article, i) =>
                                 <ArticleComponent key={i} article={article} />
                             )}
 
