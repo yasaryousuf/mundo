@@ -36,22 +36,27 @@ export default class NavbarComponent extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">All</NavLink>
+                <NavLink href="/">Everything</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/category/sports">
-                  Sports
+                  Top Headlines
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  Category
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Coming</DropdownItem>
-                  <DropdownItem>soon</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Cheers!</DropdownItem>
+                  <DropdownItem>All</DropdownItem>
+                  <DropdownItem>Politics</DropdownItem>
+                  <DropdownItem>Sports</DropdownItem>
+                  <DropdownItem>Business</DropdownItem>
+                  <DropdownItem>Entertainment</DropdownItem>
+                  <DropdownItem>Health</DropdownItem>
+                  <DropdownItem>General</DropdownItem>
+                  <DropdownItem>Science</DropdownItem>
+                  <DropdownItem>Technology</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

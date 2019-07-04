@@ -22,26 +22,34 @@ export default class SidebarComponent extends React.Component {
                         containers!
                     </div>
 
-                    <div className="row mx-2">
-                    <div className="col-md-4">
-                        <div className="checkbox">
-                            <label><input type="radio" value="" name="country" onChange={this.handleChange} /> All</label>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="" name="country" onChange={this.handleChange} /> All</label>
+                            </div>
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="gb" name="country" onChange={this.handleChange} /> England</label>
+                            </div>
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="ca" name="country" onChange={this.handleChange} /> Canada</label>
+                            </div>
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="au" name="country" onChange={this.handleChange} /> Australia</label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="checkbox">
-                            <label><input type="radio" value="gb" name="country" onChange={this.handleChange} /> England</label>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                            <div className="checkbox">
-                            <label><input type="radio" value="us" name="country" onChange={this.handleChange} /> USA</label>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                            <div className="checkbox disabled">
-                            <label><input type="radio" value="fr" name="country"  onChange={this.handleChange} /> France</label>
-                        </div>
+                        <div className="col-md-4">
+                                <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="us" name="country" onChange={this.handleChange} /> USA</label>
+                            </div>
+                                <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="fr" name="country"  onChange={this.handleChange} /> France</label>
+                            </div>
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="jp" name="country" onChange={this.handleChange} /> Japan</label>
+                            </div>
+                            <div className="checkbox ml-3" style={{float: 'left'}}>
+                                <label><input type="radio" value="cn" name="country" onChange={this.handleChange} /> China</label>
+                            </div>
                         </div>
                     </div>
                 </div>
