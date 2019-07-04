@@ -6,11 +6,19 @@ export default class PaginationComponent extends React.Component {
         this.state = {
             page: this.props.page
         }
+
+        this.increse = this.increse.bind(this);
+        this.decrese = this.decrese.bind(this);
     }
 
-    handlePagination(page) {
-        console.log(page);
+    increse() {
+        this.setState(prevState => { return { page: prevState.page + 1 } }, () => this.props.selectPage(this.state.page))
     }
+
+    decrese() {
+        this.setState(prevState => { return { page: prevState.page - 1 } }, () => this.props.selectPage(this.state.page))
+    }
+
 
     render() {
         return (
@@ -18,7 +26,7 @@ export default class PaginationComponent extends React.Component {
                 <ul className="pagination justify-content-center mb-4">
                     <li 
                     className="page-item disabled" 
-                        onClick={this.handlePagination(this.state.page--)}
+                        onClick={this.decrese}
                     >
                         <a 
                         className="page-link" 
@@ -30,7 +38,7 @@ export default class PaginationComponent extends React.Component {
                     </li>
                     <li 
                     className="page-item" 
-                        onClick={this.handlePagination(this.state.page++)}
+                        onClick={this.increse}
                     >
                         <a 
                         className="page-link" 

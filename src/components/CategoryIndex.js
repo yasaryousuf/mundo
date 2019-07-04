@@ -31,7 +31,8 @@ export default class CategoryIndex extends React.Component {
             }
         };
         this.search         = this.search.bind(this);
-        this.selectCountry  = this.selectCountry.bind(this);
+        this.selectCountry = this.selectCountry.bind(this);
+        this.selectPage  = this.selectPage.bind(this);
     }
 
     selectPage(page) {
@@ -97,19 +98,19 @@ export default class CategoryIndex extends React.Component {
         console.log(urlParam);
         this.setState({ isLoading: true });
 
-        axios(
-            `https://newsapi.org/v2/top-headlines?${urlParam}`,
-            {
-                method: "GET",
-                mode: "no-cors"
-            }
-        )
-            .then(response => {
-                this.setState({ articles: response.data.articles, isLoading: false });
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        // axios(
+        //     `https://newsapi.org/v2/top-headlines?${urlParam}`,
+        //     {
+        //         method: "GET",
+        //         mode: "no-cors"
+        //     }
+        // )
+        //     .then(response => {
+        //         this.setState({ articles: response.data.articles, isLoading: false });
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
     }
 
 
