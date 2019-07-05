@@ -37,7 +37,7 @@ export default class SidebarComponent extends React.Component {
                             </div>
                             <div className="col-md-6">
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="us" name="country" onChange={this.handleChange} /> USA</label>
+                                    <label><input type="radio" value="us" name="country" onChange={this.handleChange} checked/> USA</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
                                     <label><input type="radio" value="fr" name="country" onChange={this.handleChange} /> France</label>
