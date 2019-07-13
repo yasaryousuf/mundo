@@ -27,13 +27,16 @@ export default class CategoriesComponent extends React.Component {
                 <div className="row">
                         <div className="col-lg-6">
                             <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                <label><input type="radio" value="" name="category" onChange={this.handleChange} />
+                                <label><input type="radio" value="" name="category" onChange={this.handleChange}
+                                    checked={!this.props.category ? 'checked' : ''}/>
                                     &nbsp;All
                                 </label>
                             </div>
                             {arrayFirstHalf.map((category, i) => (
                                 <div className="checkbox ml-3" style={{ float: 'left' }} key={i}>
-                                    <label><input type="radio" value={category} name="category" onChange={this.handleChange} /> 
+                                    <label><input type="radio" value={category} name="category" onChange={this.handleChange} 
+                                    checked={this.props.category === category ? 'checked' : ''}
+                                    /> 
                                         &nbsp;{category.charAt(0).toUpperCase() + category.slice(1)}
                                     </label>
                                 </div>
@@ -42,7 +45,9 @@ export default class CategoriesComponent extends React.Component {
                     <div className="col-lg-6">
                             {arraySecondHalf.map((category, i) => (
                                 <div className="checkbox ml-3" style={{ float: 'left' }} key={i}>
-                                    <label><input type="radio" value={category} name="country" onChange={this.handleChange} /> 
+                                    <label><input type="radio" value={category} name="category" onChange={this.handleChange} 
+                                    checked={this.props.category === category ? 'checked' : ''}
+                                    /> 
                                         &nbsp;{category.charAt(0).toUpperCase() + category.slice(1)}
                                     </label>
                                 </div>

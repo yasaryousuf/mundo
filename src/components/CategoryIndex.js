@@ -29,6 +29,7 @@ export default class CategoryIndex extends React.Component {
                 sources: '',
                 page: 0,
                 pageSize: 20,
+                category: '',
             }
         };
         this.search         = this.search.bind(this);
@@ -177,9 +178,9 @@ export default class CategoryIndex extends React.Component {
 
                             <PerPage perpage={this.state.searchParams.pageSize} selectPerPage={this.selectPerPage}/>
 
-                            <CategoriesComponent url={this.state.url} addCategory={this.addCategory} selectCategory={this.selectCategory} />
+                            <CategoriesComponent selectCategory={this.selectCategory} category={this.state.category}/>
 
-                            <SidebarComponent selectCountry={this.selectCountry} country={this.state.searchParams.pageSize}/>
+                            <SidebarComponent selectCountry={this.selectCountry} country={this.state.searchParams.country}/>
 
                         </div>
                     </div>

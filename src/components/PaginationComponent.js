@@ -37,7 +37,7 @@ export default class PaginationComponent extends React.Component {
                   </a>
                     </li>
                     <li 
-                        className={"page-item " + (this.state.page >= 1 ? 'disabled' : '')}
+                        className={"page-item"}
                         onClick={this.increse}
                     >
                         <a 

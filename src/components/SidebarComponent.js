@@ -23,30 +23,46 @@ export default class SidebarComponent extends React.Component {
                     <div className="row">
                             <div className="col-md-6">
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="" name="country" onChange={this.handleChange} /> All</label>
+                                    <label><input type="radio" value="" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === '' ? 'checked' : ''}
+                                    /> All</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="gb" name="country" onChange={this.handleChange} /> England</label>
+                                    <label><input type="radio" value="gb" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === 'gb' ? 'checked' : ''}
+                                    /> England</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="ca" name="country" onChange={this.handleChange} /> Canada</label>
+                                    <label><input type="radio" value="ca" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === 'ca' ? 'checked' : ''}
+                                    /> Canada</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="au" name="country" onChange={this.handleChange} /> Australia</label>
+                                    <label><input type="radio" value="au" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === 'au' ? 'checked' : ''}
+                                    /> Australia</label>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="us" name="country" onChange={this.handleChange} checked/> USA</label>
+                                    <label><input type="radio" value="us" name="country" onChange={this.handleChange} 
+                                    checked={this.props.country === 'us' ? 'checked' : ''}
+                                    /> USA</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="fr" name="country" onChange={this.handleChange} /> France</label>
+                                    <label><input type="radio" value="fr" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === 'fr' ? 'checked' : ''}
+                                    /> France</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="jp" name="country" onChange={this.handleChange} /> Japan</label>
+                                    <label><input type="radio" value="jp" name="country" onChange={this.handleChange} 
+                                    checked={this.props.country === 'jp' ? 'checked' : ''}
+                                    /> Japan</label>
                                 </div>
                                 <div className="checkbox ml-3" style={{ float: 'left' }}>
-                                    <label><input type="radio" value="cn" name="country" onChange={this.handleChange} /> China</label>
+                                    <label><input type="radio" value="cn" name="country" onChange={this.handleChange}  
+                                    checked={this.props.country === 'cn' ? 'checked' : ''}
+                                    /> China</label>
                                 </div>
                             </div>
                         </div>                        
