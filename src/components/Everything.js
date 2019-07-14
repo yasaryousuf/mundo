@@ -9,7 +9,7 @@ import SearchComponent from "./SearchComponent";
 import ArticleComponent from "./ArticleComponent";
 import PaginationComponent from "./PaginationComponent";
 import FooterComponent from "./FooterComponent";
-import SidebarComponent from "./SidebarComponent";
+import LanguageComponent from "./SideComponent/LanguageComponent";
 import DateComponent from "./DateComponent";
 import Spinner from "./Spinner";
 import PerPage from "./SideComponent/PerPage";
@@ -26,19 +26,35 @@ export default class EveryThing extends React.Component {
             searchParams: {
                 apiKey: apikey,
                 q: 'messi',
-                // sources: '',
+                language: '',
                 from: '',
-                to: ''
+                to: '',
                 // page: 0,
-                // pageSize: 20,
+                pageSize: 20,
             }
         };
         this.search = this.search.bind(this);
         // this.selectPage = this.selectPage.bind(this);
-        // this.selectPerPage = this.selectPerPage.bind(this);
+        this.selectPerPage = this.selectPerPage.bind(this);
+        this.selectLanguage = this.selectLanguage.bind(this);
         this.setDate = this.setDate.bind(this);
     }
 
+    selectLanguage(language) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, language: language
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
+
+        });
+
+    }
     // selectPage(page) {
     //     page < 0 ? page = 0 : page = page;
 
@@ -57,22 +73,23 @@ export default class EveryThing extends React.Component {
 
     // }
 
-    // selectPerPage(perpage) {
-    //     this.setState(prevState => {
-    //         return {
-    //             searchParams: {
-    //                 ...prevState.searchParams, pageSize: perpage
-    //             }
-    //         };
-    //     }, () => {
-    //         let urlParam = new URLSearchParams(this.state.searchParams);
-    //         urlParam = urlParam.toString();
-    //         this.getData(urlParam);
 
-    //     });
 
-    // }
+    selectPerPage(perpage) {
+        this.setState(prevState => {
+            return {
+                searchParams: {
+                    ...prevState.searchParams, pageSize: perpage
+                }
+            };
+        }, () => {
+            let urlParam = new URLSearchParams(this.state.searchParams);
+            urlParam = urlParam.toString();
+            this.getData(urlParam);
 
+        });
+
+    }
     setDate(dateObj) {
         this.setState(prevState => {
             return {
@@ -166,7 +183,7 @@ export default class EveryThing extends React.Component {
 
                             <CategoriesComponent url={this.state.url} addCategory={this.addCategory} selectCategory={this.selectCategory} />
 
-                            <SidebarComponent selectCountry={this.selectCountry} country={this.state.searchParams.pageSize} />
+                            <LanguageComponent selectLanguage={this.selectLanguage} language={this.state.searchParams.language} />
 
                         </div>
                     </div>
